@@ -1,3 +1,5 @@
+const {nanoid} = require('nanoid');
+
 class NotesService {
     constructor() {
         this._notes = [];
@@ -9,7 +11,7 @@ class NotesService {
         const updatedAt = createdAt;
 
         const newNote = {
-            title, tags, body, id, createdAt, UpdatedAt,
+            title, tags, body, id, createdAt, updatedAt,
         }
 
         this._notes.push(newNote);
