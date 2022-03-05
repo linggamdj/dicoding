@@ -1,5 +1,4 @@
 const Joi = require('joi');
-const joi = require('joi');
 
 const NotePayLoadSchema = Joi.object({
     title: Joi.string().required(),
