@@ -1,20 +1,16 @@
 exports.up = pgm => {
-    pgm.createTable('music',
+    pgm.createTable('albums',
     {
         id: {
             type: 'VARCHAR(50)',
             primaryKey: true,
         },
-        title: {
+        name: {
             type: 'TEXT',
             notNull: true,
         },
-        body: {
+        year: {
             type: 'TEXT',
-            notNull: true,
-        },
-        songs: {
-            type: 'TEXT[]',
             notNull: true,
         },
         created_at: {
@@ -29,5 +25,5 @@ exports.up = pgm => {
 };
 
 exports.down = pgm => {
-    pgm.dropTable('music');
+    pgm.dropTable('albums');
 };
