@@ -14,6 +14,7 @@ const mapDBAlbumToModel = ({
 
 const mapDBSongToModel = ({
     id,
+    title,
     year,
     genre,
     performer,
@@ -23,6 +24,7 @@ const mapDBSongToModel = ({
     updated_at,
 }) => ({
     id,
+    title,
     year,
     genre,
     performer,
