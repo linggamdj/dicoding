@@ -50,14 +50,34 @@ class AlbumsHandler {
     }
   }
 
-  async getAlbumsHandler() {
-    const albums = await this._service.getAlbums();
-    return {
-      status: 'success',
-      data: {
-        albums,
-      },
-    };
+  async getAlbumsHandler(h) {
+    try {
+      const albums = await this._service.getAlbums();
+      return {
+        status: 'success',
+        data: {
+          albums,
+        },
+      };
+    } catch (error) {
+      if (error instanceof ClientError) {
+        const response = h.response({
+          status: 'fail',
+          message: error.message,
+        });
+        response.code(error.statusCode);
+        return response;
+      }
+
+      // Server Error
+      const response = h.request({
+        status: 'error',
+        message: 'Maaf, terjadi kegagalan pada server kami.',
+      });
+      response.code(500);
+      console.error(error);
+      return response;
+    }
   }
 
   async getAlbumByIdHandler(request, h) {
