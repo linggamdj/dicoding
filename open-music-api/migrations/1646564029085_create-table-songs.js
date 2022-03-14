@@ -25,8 +25,8 @@ exports.up = (pgm) => {
         type: 'INT',
         notNull: false,
       },
-      albumId: {
-        type: 'TEXT',
+      album_id: {
+        type: 'VARCHAR(50)',
         notNull: false,
       },
       created_at: {
@@ -38,6 +38,8 @@ exports.up = (pgm) => {
         notNull: true,
       },
     });
+
+  pgm.addConstraint('songs', 'fk_songs.album_id_albums.id', 'FOREIGN KEY(album_id) REFERENCES albums(id) ON DELETE CASCADE');
 };
 
 exports.down = (pgm) => {
