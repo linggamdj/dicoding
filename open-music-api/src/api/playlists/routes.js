@@ -1,5 +1,4 @@
 const routes = (handler) => [
-  // playlists routes
   {
     method: 'POST',
     path: '/playlists',
