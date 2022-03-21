@@ -45,7 +45,7 @@ const init = async () => {
   const notesService = new NotesService(collaborationsService, cacheService);
   const usersService = new UsersService();
   const authenticationsService = new AuthenticationsService();
-  const storageService = new StorageService(path.resolve(__dirname, 'api/uploads/file/images'))
+  const storageService = new StorageService(path.resolve(__dirname, 'api/uploads/file/images'));
 
   const server = Hapi.server({
     port: process.env.PORT,
@@ -65,7 +65,7 @@ const init = async () => {
     {
       plugin: Inert,
     },
-  ])
+  ]);
 
   // mendefinisikan strategy autentikasi jwt
   server.auth.strategy('notesapp_jwt', 'jwt', {
@@ -121,7 +121,7 @@ const init = async () => {
       options: {
         service: ProducerService,
         validator: ExportsValidator,
-      }
+      },
     },
     {
       plugin: uploads,

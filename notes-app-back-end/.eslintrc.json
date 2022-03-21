@@ -11,6 +11,8 @@
     },
     "rules": {
         "no-console": "off",
-        "no-underscoredangle": "off",
+        "no-underscore-dangle": "off",
+        "linebreak-style": ["error", "windows"],
+        "camelcase": "off"
     }
 }
