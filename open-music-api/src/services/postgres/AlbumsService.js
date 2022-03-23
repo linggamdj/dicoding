@@ -11,12 +11,13 @@ class AlbumsService {
 
   async addAlbum({ name, year }) {
     const id = `album-${nanoid(16)}`;
+    const cover = null;
     const createdAt = new Date().toISOString();
     const updatedAt = createdAt;
 
     const query = {
-      text: 'INSERT INTO albums VALUES($1, $2, $3, $4, $5) RETURNING id',
-      values: [id, name, year, createdAt, updatedAt],
+      text: 'INSERT INTO albums VALUES($1, $2, $3, $4, $5, $6) RETURNING id',
+      values: [id, name, year, cover, createdAt, updatedAt],
     };
 
     const result = await this._pool.query(query);
@@ -28,8 +29,26 @@ class AlbumsService {
     return result.rows[0].id;
   }
 
+  async addAlbumCover(id, coverUrl) {
+    const query = {
+      text: 'UPDATE albums SET cover = $1 WHERE id = $2 RETURNING id',
+      values: [coverUrl, id],
+    };
+
+    const result = await this._pool.query(query);
+
+    if (!result.rows[0].id) {
+      throw new InvariantError('Cover gagal ditambahkan');
+    }
+  }
+
   async getAlbums() {
     const result = await this._pool.query('SELECT * FROM albums');
+
+    if (!result.rows.length) {
+      throw new NotFoundError('Album tidak ditemukan');
+    }
+
     return result.rows.map(mapDBAlbumToModel);
   }
 
